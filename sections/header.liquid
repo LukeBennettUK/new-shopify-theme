@@ -1,0 +1,30 @@
+<header>
+  <!-- custom logo, otherwise shop name -->
+  <h1><a href="{{ routes.root_url }}">{{ shop.name }}</a></h1>
+  <!-- custom social links -->
+
+  <nav>
+    <a href="#">Shop</a>
+    <a href="#">Collections</a>
+    <a href="#">Account</a>
+  </nav>
+
+  {% render 'search-icon' %}
+  <a href="#">{% render 'icon-basket' %}</a>
+  
+  <!-- hamburger menu -->
+  <!-- <label for="hamburger-menu-button">
+    <input type="checkbox" id="hamburger-menu-button">
+    <span></span>
+  </label> -->
+
+  <button type="button"><span></span></button>
+
+</header>
+
+<!-- menu -->
+<div id="hamburger-menu">
+  <a href="#">About Us</a>
+  <a href="#">Contact</a>
+</div>
+
