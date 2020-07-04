@@ -1,0 +1,46 @@
+{%- for block in section.blocks -%}
+  {%- assign product = all_products[block.settings.product] -%}
+  
+  <div>
+    <a href="{{ product.url }}">
+      <!-- <div style="background-image: url('{{ product.featured_image | img_url: '300x' }}');"></div> -->
+      <img src="{{ product.featured_image | img_url: '258x' }}" alt="{{ product.title | downcase}}">
+    </a>
+    <h3>{{ product.title }}</h3>
+    <p>{{ product.description }}</p>
+    <button type="button">
+      <span>Add to bag</span>
+      <span></span>
+      <span>{{ product.price | money_without_trailing_zeros }}</span>
+    </button>
+  </div>
+{%- endfor -%}
+
+
+{% schema %}
+  {
+    "name": "Products row",
+    "class": "products-row",
+    "settings": [],
+    "max_blocks": 4,
+    "blocks": [
+      {
+        "type": "product",
+        "name": "Product",
+        "settings": [
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "category": "Products",
+        "name": "Products row"
+      }
+    ]
+  }
+{% endschema %}

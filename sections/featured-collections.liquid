@@ -1,0 +1,43 @@
+{% for block in section.blocks %}
+  {%- assign collection = collections[block.settings.featured_collection] -%}
+
+  <a href="{{ collection.url }}">
+    <img src="{{ collection.image | img_url: '500x' }}" alt="{{ collection.title | downcase }}">
+    <div>
+      <h2>{{ collection.title }}</h2>
+      <span>{{ block.settings.call_to_action_text }}</span>
+    </div>
+  </a>
+{% endfor %}
+
+{% schema %}
+  {
+    "name": "Featured collections",
+    "class": "featured-collections",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "Collection",
+        "settings": [
+          {
+            "type": "collection",
+            "id": "featured_collection",
+            "label": "Featured collection"
+          },
+          {
+            "type": "text",
+            "id": "call_to_action_text",
+            "label": "Call to action"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "category": "Collections",
+        "name": "Featured collections"
+      }
+    ]
+  }
+{% endschema %}

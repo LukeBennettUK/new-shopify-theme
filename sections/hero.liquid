@@ -1,0 +1,73 @@
+<div class="first-image" style="background-image: url('{{ section.settings.first_image | img_url: "500x" }}');">
+  <h2>{{ section.settings.heading_text }}</h2>
+  <a href="{{ collections[section.settings.featured_collection].url }}" style="color: {{ section.settings.link_color }}">{{ section.settings.link_text }}</a>
+</div>
+
+<div class="second-image">
+  <div style="background-image: url('{{ section.settings.second_image | img_url: "500x" }}');"></div>
+</div>
+
+<div class="third-image" style="background-image: url('{{ section.settings.third_image | img_url: "500x" }}');"></div>
+
+<div class="paragraph">
+  <p>{{ section.settings.paragraph_text }}</p>
+</div>
+
+{% schema %}
+  {
+    "name": "Image with text overlay",
+    "class": "image-with-text-overlay",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "first_image",
+        "label": "First image"
+      },
+      {
+        "type": "image_picker",
+        "id": "second_image",
+        "label": "Second image"
+      },
+      {
+        "type": "image_picker",
+        "id": "third_image",
+        "label": "Third image"
+      },
+      {
+        "type": "text",
+        "id": "heading_text",
+        "label": "Heading text",
+        "default": "Lorem ipsum dolor sit"
+      },
+      {
+        "type": "text",
+        "id": "link_text",
+        "label": "Link text",
+        "default": "Discover the new collection"
+      },
+      {
+        "type": "color",
+        "id": "link_color",
+        "label": "Link color",
+        "default": "#ff0000"
+      },
+      {
+        "type": "collection",
+        "id": "featured_collection",
+        "label": "Featured collection"
+      },
+      {
+        "type": "richtext",
+        "id": "paragraph_text",
+        "label": "Paragraph text",
+        "default": "<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum reprehenderit inventore, minus dolor fuga aspernatur exercitationem hic a eligendi quae obcaecati ipsam facere.</p>"
+      }
+    ],
+    "presets": [
+      {
+        "category": "Image",
+        "name": "Image with text overlay"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,30 +1,116 @@
-<header>
-  <!-- custom logo, otherwise shop name -->
-  <h1><a href="{{ routes.root_url }}">{{ shop.name }}</a></h1>
-  <!-- custom social links -->
+{%- assign social_icons = false -%}
 
+{%- if
+  settings.social_instagram_link != blank
+  or settings.social_snapchat_link != blank
+  or settings.social_twitter_link != blank
+-%}
+  {%- assign social_icons = true -%}
+  {%- assign socials = "instagram twitter snapchat" | split: ' ' -%}
+{%- endif -%}
+
+{% style %}
+  #shopify-section-header header.fixed,
+  #shopify-section-header header.active {
+    background: {{ section.settings.pop_out_navigation_color }};
+  }
+
+  #shopify-section-header a {
+    color: {{ section.settings.link_color }}
+  }
+{% endstyle %}
+
+<header id="main-header">
   <nav>
-    <a href="#">Shop</a>
-    <a href="#">Collections</a>
-    <a href="#">Account</a>
+    <div class="logo-name-social-container">
+      {%- if section.settings.logo -%}
+        <a id="shop-logo" href="{{ routes.root_url }}">
+          <img src="{{ section.settings.logo | img_url: '300x' }}" alt="{{ shop.name | downcase }}">
+        </a>
+      {%- else -%}
+        <a id="shop-name" href="{{ routes.root_url }}"><h1>{{ shop.name }}</h1></a>
+      {%- endif -%}
+
+      {%- if social_icons -%}
+        <ul class="social-icons">
+          {%- for social in socials -%}
+            {%- assign social_link = social | prepend: 'social_' | append: '_link' -%}
+
+            {%- if settings[social_link] != blank -%}
+              <li>
+                <a href="{{ settings[social_link] | escape }}">
+                  {%- case social -%}
+                    {%- when 'instagram' -%}
+                      {%- render 'icon-instagram' -%}    
+                    {%- when 'snapchat' -%}
+                      {%- render 'icon-snapchat' -%}
+                    {%- when 'twitter' -%}
+                      {%- render 'icon-twitter' -%}
+                  {%- endcase -%}
+                </a>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+
+    {%- for link in linklists[section.settings.primary_linklist].links -%}
+      <a class="primary-navigation-link" href="{{ link.url }}">{{ link.title }}</a>
+    {%- endfor -%}
+
+    {%- if shop.customer_accounts_enabled -%}
+      {%- if customer -%}
+        <a href="{{ routes.account_url }}" class="primary-navigation-link">Account</a>
+      {%- else -%}
+        <a href="{{ routes.account_login_url }}" class="primary-navigation-link">Account</a>
+      {%- endif -%}
+    {%- endif -%}
+
+    <div class="navigation-icons">
+      <button id="search-button" type="button">{%- render 'icon-search' -%}</button>
+      <a href="{{ routes.cart_url }}">{%- render 'icon-basket' -%}</a>
+      <button id="side-menu-button" type="button" onclick="toggleSideMenu()"><span></span></button>
+    </div>
+
+    {%- for link in linklists[section.settings.secondary_linklist].links -%}
+      <a class="secondary-navigation-link" href="{{ link.url }}">{{ link.title }}</a>
+    {%- endfor %}
   </nav>
-
-  {% render 'search-icon' %}
-  <a href="#">{% render 'icon-basket' %}</a>
-  
-  <!-- hamburger menu -->
-  <!-- <label for="hamburger-menu-button">
-    <input type="checkbox" id="hamburger-menu-button">
-    <span></span>
-  </label> -->
-
-  <button type="button"><span></span></button>
-
 </header>
 
-<!-- menu -->
-<div id="hamburger-menu">
-  <a href="#">About Us</a>
-  <a href="#">Contact</a>
-</div>
-
+{% schema %}
+  {
+    "name": "Header",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image"
+      },
+      {
+        "type": "link_list",
+        "id": "primary_linklist",
+        "label": "Main menu",
+        "default": "main-menu"
+      },
+      {
+        "type": "link_list",
+        "id": "secondary_linklist",
+        "label": "Side-nav menu"
+      },
+      {
+        "type": "color",
+        "id": "pop_out_navigation_color",
+        "label": "Pop-out navigation color",
+        "default": "#000"
+      },
+      {
+        "type": "color",
+        "id": "link_color",
+        "label": "Link color",
+        "default": "#fff"
+      }
+    ]
+  }
+{% endschema %}

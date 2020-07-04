@@ -1,0 +1,93 @@
+{%- assign collection = collections[section.settings.featured_collection] -%}
+
+{% style %}
+  .featured-products-slider {
+    background: {{ section.settings.background_color }};
+  }
+
+  .featured-products-slider h2 {
+    color: {{ section.settings.title_color }}
+  }
+{% endstyle %}
+
+{%- if collection.products_count > 0 -%}
+  <div>
+    <h2 class="margin-bottom">Featured</h2>
+
+    <div>
+      <button type="button" 
+        onclick="showPrevNextProduct(event, {{ collection.products_count }}, 'prev')" 
+        disabled>
+
+        Prev
+      </button>
+      <button type="button" 
+        onclick="showPrevNextProduct(event, {{ collection.products_count }}, 'next')">
+
+        Next
+      </button>
+    </div>
+
+    <div>
+      <div>
+        {%- for product in collection.products -%}
+          <div>
+            <a href="{{ product.url }}">
+              <!-- <div style="background-image: url('{{ product.featured_image | img_url: '300x' }}');"></div> -->
+              <img src="{{ product.featured_image | img_url: '258x' }}" alt="{{ product.title | downcase}}">
+            </a>
+            <h3>{{ product.title }}</h3>
+            <p>{{ product.description }}</p>
+            <button type="button">
+              <span>Add to bag</span>
+              <span></span>
+              <span>{{ product.price | money_without_trailing_zeros }}</span>
+            </button>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+{%- else -%}
+  <p>There are currently no products in this collection.</p>
+{%- endif -%}
+
+<div style="background-image: url('{%- if collection.image -%}{{ collection.image | img_url: "500x" }}{%- else -%}{{ section.settings.featured_collection_image | img_url: "900x" }}{%- endif -%}');"></div>
+
+{% schema %}
+  {
+    "name": "Featured products slider",
+    "class": "featured-products-slider",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "featured_collection_image",
+        "label": "Featured collection image",
+        "info": "The collection image will be used by default, but use this if you wish to change it"
+      },
+      {
+        "type": "collection",
+        "id": "featured_collection",
+        "label": "Featured products"
+      },
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background color",
+        "default": "#ff323d"
+      },
+      {
+        "type": "color",
+        "id": "title_color",
+        "label": "Title color",
+        "default": "#FFDF00"
+      }
+    ],
+    "presets": [
+      {
+        "category": "Products",
+        "name": "Featured products slider"
+      }
+    ]
+  }
+{% endschema %}

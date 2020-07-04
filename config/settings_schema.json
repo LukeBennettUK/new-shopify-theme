@@ -1,1 +1,147 @@
-[]
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Luke's theme",
+    "theme_author": "Luke Bennett",
+    "theme_version": "1",
+    "theme_documentation_url": "https:\/\/help.shopify.com\/manual\/using-themes\/themes-by-shopify\/debut",
+    "theme_support_email": "lukebennett@lukebennettuk.co.uk"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Text"
+      },
+      {
+        "type": "color",
+        "id": "color_body",
+        "label": "Body text",
+        "default": "#000"
+      },
+      {
+        "type": "color",
+        "id": "color_shop_name",
+        "label": "Shop name",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "color_header",
+        "label": "Headers",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "color_link",
+        "label": "Links",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "color_link_background_hover_state",
+        "label": "Link hover background",
+        "default": "#ff0000"
+      },
+      {
+        "type": "color",
+        "id": "color_link_hover_state",
+        "label": "Link hover color",
+        "default": "#fff"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Headings and buttons"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_header_font",
+        "label": "Font",
+        "default": "montserrat_n4"
+      },
+      {
+        "type": "range",
+        "id": "type_header_base_size",
+        "label": "Heading base size",
+        "default": 26,
+        "min": 20,
+        "max": 36,
+        "step": 1,
+        "unit": "px"
+      },
+      {
+        "type": "header",
+        "content": "Links"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_link_font",
+        "label": "Font",
+        "default": "montserrat_n4"
+      },
+      {
+        "type": "range",
+        "id": "type_link_base_size",
+        "label": "Link base size",
+        "default": 26,
+        "min": 20,
+        "max": 36,
+        "step": 1,
+        "unit": "px"
+      },
+      {
+        "type": "header",
+        "content": "Body text"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "label": "Font",
+        "default": "montserrat_n4"
+      },
+      {
+        "type": "range",
+        "id": "type_body_base_size",
+        "label": "Body base size",
+        "default": 26,
+        "min": 20,
+        "max": 36,
+        "step": 1,
+        "unit": "px"
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social accounts"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram_link",
+        "label": "Instagram",
+        "info": "https:\/\/instagram.com\/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_snapchat_link",
+        "label": "Snapchat",
+        "info": "https:\/\/snapchat.com\/shopify"
+      },
+      {
+        "type": "text",
+        "id": "social_twitter_link",
+        "label": "Twitter",
+        "info": "https:\/\/twitter.com\/shopify"
+      }
+    ]
+  }
+]

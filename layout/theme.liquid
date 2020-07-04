@@ -19,7 +19,7 @@
   {{ content_for_header }}
 </head>
 
-<body onscroll="scrollContent(event)">
+<body onscroll="toggleFixedHeader()">
   {% section 'header' %}
 
   {{ content_for_layout }}

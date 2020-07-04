@@ -1,0 +1,67 @@
+<h2>Testimonials</h2>
+
+<div>
+  <div>
+    <div>
+      {% render 'icon-double-quotation' %}
+
+      <div>
+        {% for block in section.blocks %}
+          <div>
+            <p>{{ block.settings.testimonial }}</p>
+            <p>{{ block.settings.testimonial_author }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <button type="button" 
+      onclick="showPrevNextTestimonial(event, {{ section.blocks.size }}, 'prev')" 
+      disabled>
+
+      Prev
+    </button>
+    <button type="button" 
+  onclick="showPrevNextTestimonial(event, {{ section.blocks.size }}, 'next')">
+
+      Next
+    </button>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Testimonials slider",
+    "class": "testimonials-slider",
+    "settings": [],
+    "max_blocks": 10,
+    "blocks": [
+      {
+        "type": "testimonial",
+        "name": "Testimonial",
+        "settings": [
+          {
+            "type": "text",
+            "id": "testimonial_author",
+            "label": "Author",
+            "default": "Jane Doe"
+          },
+          {
+            "type": "textarea",
+            "id": "testimonial",
+            "label": "Testimonial",
+            "default": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Et at illum, a perspiciatis ex fugit cumque soluta, cupiditate id nostrum neque fugiat iure quod."
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "category": "Testimonials",
+        "name": "Testimonials slider"
+      }
+    ]
+  }
+{% endschema %}
