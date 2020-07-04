@@ -1,6 +1,12 @@
 {%- assign formId = 'newsletter-subscription' -%}
 
-<h2>Stay in touch</h2>
+{% style %}
+  input.error {
+    border: 1px solid {{ section.settings.error_message_background }} !important;
+  }
+{% endstyle %}
+
+<h2 style="color: {{ section.settings.header_color }}">Stay in touch</h2>
 
 <!-- <div> -->
   <div>
@@ -8,7 +14,7 @@
 
     {% form 'customer', id: formId, novalidate: 'novalidate' %}
       {%- if form.posted_successfully? -%}
-        <p class="successful">Thanks for subscribing!</p>
+        <p class="successful" style="background: {{ section.settings.success_message_background }}; color: {{ section.settings.success_message_color }};">Thanks for subscribing!</p>
       {%- endif -%}
 
       <div>
@@ -19,11 +25,11 @@
         placeholder="Enter your email address here"
         required />
         
-        <button type="submit" name="commit">Subscribe</button>
+        <button type="submit" name="commit" style="background: {{ section.settings.subscribe_button_background }}; color: {{ section.settings.subscribe_button_color }};">Subscribe</button>
       </div>
 
       {% if form.errors contains 'email' %}
-        <p class="error">Email is invalid</p>
+        <p style="background: {{ section.settings.error_message_background }}; color: {{ section.settings.error_message_color }};">Email is invalid</p>
       {% endif %}
     {% endform %}
   </div>
@@ -39,6 +45,48 @@
       "id": "call_to_action",
       "label": "Call to action",
       "default": "<p>Subscribe to our newsletter and get <strong>15% off</strong> your next order, Who doesn't love a deal?</p>"
+    },
+    {
+      "type": "color",
+      "id": "header_color",
+      "label": "Header color",
+      "default": "#000"
+    },
+    {
+      "type": "color",
+      "id": "subscribe_button_background",
+      "label": "Subscribe button background",
+      "default": "#ff323d"
+    },
+    {
+      "type": "color",
+      "id": "subscribe_button_color",
+      "label": "Subscribe button text color",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "success_message_background",
+      "label": "Success message background color",
+      "default": "#008000"
+    },
+    {
+      "type": "color",
+      "id": "success_message_color",
+      "label": "Success message text color",
+      "default": "#fff"
+    },
+    {
+      "type": "color",
+      "id": "error_message_background",
+      "label": "Error message background color",
+      "default": "#ff323d"
+    },
+    {
+      "type": "color",
+      "id": "error_message_color",
+      "label": "Error message text color",
+      "default": "#fff"
     }
   ],
   "presets": [

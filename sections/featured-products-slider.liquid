@@ -57,19 +57,13 @@
   <p>There are currently no products in this collection.</p>
 {%- endif -%}
 
-<div style="background-image: url('{%- if collection.image -%}{{ collection.image | img_url: "500x" }}{%- else -%}{{ section.settings.featured_collection_image | img_url: "900x" }}{%- endif -%}');"></div>
+<div style="background-image: url('{{ collection.image | img_url: "900x" }}');"></div>
 
 {% schema %}
   {
     "name": "Featured products slider",
     "class": "featured-products-slider",
     "settings": [
-      {
-        "type": "image_picker",
-        "id": "featured_collection_image",
-        "label": "Featured collection image",
-        "info": "The collection image will be used by default, but use this if you wish to change it"
-      },
       {
         "type": "collection",
         "id": "featured_collection",

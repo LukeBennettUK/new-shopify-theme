@@ -28,26 +28,32 @@
       },
       {
         "type": "color",
-        "id": "color_header",
-        "label": "Headers",
-        "default": "#fff"
-      },
-      {
-        "type": "color",
         "id": "color_link",
-        "label": "Links",
+        "label": "Links (excluding header links)",
         "default": "#fff"
       },
       {
         "type": "color",
-        "id": "color_link_background_hover_state",
+        "id": "color_link_background_hover",
         "label": "Link hover background",
         "default": "#ff0000"
       },
       {
         "type": "color",
-        "id": "color_link_hover_state",
-        "label": "Link hover color",
+        "id": "color_link_hover",
+        "label": "Link hover text color",
+        "default": "#fff"
+      },
+      {
+        "type": "color",
+        "id": "color_button_background_hover",
+        "label": "Button hover background",
+        "default": "#000"
+      },
+      {
+        "type": "color",
+        "id": "color_button_hover",
+        "label": "Button hover text color",
         "default": "#fff"
       }
     ]
@@ -66,16 +72,6 @@
         "default": "montserrat_n4"
       },
       {
-        "type": "range",
-        "id": "type_header_base_size",
-        "label": "Heading base size",
-        "default": 26,
-        "min": 20,
-        "max": 36,
-        "step": 1,
-        "unit": "px"
-      },
-      {
         "type": "header",
         "content": "Links"
       },
@@ -86,16 +82,6 @@
         "default": "montserrat_n4"
       },
       {
-        "type": "range",
-        "id": "type_link_base_size",
-        "label": "Link base size",
-        "default": 26,
-        "min": 20,
-        "max": 36,
-        "step": 1,
-        "unit": "px"
-      },
-      {
         "type": "header",
         "content": "Body text"
       },
@@ -104,16 +90,6 @@
         "id": "type_body_font",
         "label": "Font",
         "default": "montserrat_n4"
-      },
-      {
-        "type": "range",
-        "id": "type_body_base_size",
-        "label": "Body base size",
-        "default": 26,
-        "min": 20,
-        "max": 36,
-        "step": 1,
-        "unit": "px"
       }
     ]
   },

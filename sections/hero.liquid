@@ -1,5 +1,5 @@
-<div class="first-image" style="background-image: url('{{ section.settings.first_image | img_url: "500x" }}');">
-  <h2>{{ section.settings.heading_text }}</h2>
+<div class="first-image" style="background-image: url('{{ section.settings.first_image | img_url: "900x" }}');">
+  <h2 style="color: {{ section.settings.header_color }}">{{ section.settings.heading_text }}</h2>
   <a href="{{ collections[section.settings.featured_collection].url }}" style="color: {{ section.settings.link_color }}">{{ section.settings.link_text }}</a>
 </div>
 
@@ -40,6 +40,12 @@
         "default": "Lorem ipsum dolor sit"
       },
       {
+        "type": "color",
+        "id": "header_color",
+        "label": "Header color",
+        "default": "#fff"
+      },
+      {
         "type": "text",
         "id": "link_text",
         "label": "Link text",
@@ -57,10 +63,10 @@
         "label": "Featured collection"
       },
       {
-        "type": "richtext",
+        "type": "textarea",
         "id": "paragraph_text",
         "label": "Paragraph text",
-        "default": "<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum reprehenderit inventore, minus dolor fuga aspernatur exercitationem hic a eligendi quae obcaecati ipsam facere.</p>"
+        "default": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cum reprehenderit inventore, minus dolor fuga aspernatur exercitationem hic a eligendi quae obcaecati ipsam facere."
       }
     ],
     "presets": [

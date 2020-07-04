@@ -1,4 +1,4 @@
-<h2>Testimonials</h2>
+<h2 style="color: {{ section.settings.header_color }}">Testimonials</h2>
 
 <div>
   <div>
@@ -8,7 +8,8 @@
       <div class="slider">
         {% for block in section.blocks %}
           <div>
-            <p>{{ block.settings.testimonial }}</p>
+            <!-- <p>{{ block.settings.testimonial }}</p> -->
+            {{ block.settings.testimonial }}
             <p>{{ block.settings.testimonial_author }}</p>
           </div>
         {% endfor %}
@@ -35,7 +36,14 @@
   {
     "name": "Testimonials slider",
     "class": "testimonials-slider",
-    "settings": [],
+    "settings": [
+      {
+        "type": "color",
+        "id": "header_color",
+        "label": "Header color",
+        "default": "#ff323d"
+      }
+    ],
     "max_blocks": 10,
     "blocks": [
       {
@@ -49,10 +57,10 @@
             "default": "Jane Doe"
           },
           {
-            "type": "textarea",
+            "type": "richtext",
             "id": "testimonial",
             "label": "Testimonial",
-            "default": "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Et at illum, a perspiciatis ex fugit cumque soluta, cupiditate id nostrum neque fugiat iure quod."
+            "default": "<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Et at illum, a perspiciatis ex fugit cumque soluta, cupiditate id nostrum neque fugiat iure quod.</p>"
           }
         ]
       }

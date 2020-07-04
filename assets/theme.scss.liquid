@@ -3,10 +3,11 @@
 // Text colors
 $color-body: {{ settings.color_body }};
 $color-shop-name: {{ settings.color_shop_name }};
-$color-header: {{ settings.color_header }};
 $color-link: {{ settings.color_link }};
-$color-link-background-hover-state: {{ settings.color_link_background_hover_state }};
-$color-link-hover-state: {{ settings.color_link_hover_state }};
+$color-link-background-hover: {{ settings.color_link_background_hover }};
+$color-link-hover: {{ settings.color_link_hover }};
+$color-button-background-hover: {{ settings.color_button_background_hover }};
+$color-button-hover: {{ settings.color_button_hover }};
 
 $eastsideco-red: #ff323d;
 
@@ -61,7 +62,6 @@ body {
     font-family: $font-stack-header;
     font-weight: $font-weight-header;
     font-style: $font-style-header;
-    color: $color-header;
   }
 
   a {
@@ -74,8 +74,8 @@ body {
     color: $color-link;
 
     &:hover {
-      background: $color-link-background-hover-state !important;
-      color: $color-link-hover-state !important;
+      background: $color-link-background-hover !important;
+      color: $color-link-hover !important;
     }
   }
 
@@ -87,6 +87,11 @@ body {
     font-family: $font-stack-header;
     font-weight: $font-weight-header;
     font-style: $font-style-header;
+
+    &:hover {
+      background: $color-button-background-hover;
+      color: $color-button-hover;
+    }
   }
 
   p {
@@ -234,7 +239,6 @@ body {
         #shop-name {
           overflow: hidden;
   
-          // update this to remove the writing mode
           @media only screen and (min-width: 800px) {
             writing-mode: vertical-rl;
             width: auto;
@@ -308,6 +312,13 @@ body {
 
         @media only screen and (min-width: 800px) {
           width: auto;
+          padding: 0;
+        }
+
+        > * {
+          @media only screen and (min-width: 800px) {
+            margin: 20px;
+          }
         }
 
         button {
@@ -506,11 +517,6 @@ body {
     display: flex;
   }
 
-  button:hover {
-    background: black;
-    color: white;
-  }
-
   > div {
     // main
     &:nth-child(2) {
@@ -564,6 +570,10 @@ body {
             background: none;
             cursor: default;
             opacity: 0.8;
+
+            &:hover {
+              background: none;
+            }
           }
         }
       }
@@ -611,7 +621,10 @@ body {
                 @media only screen and (min-width: 1470px) {
                   max-width: initial;
                 }
-    
+              }
+
+              p {
+                font-weight: 100;
               }
   
               button {
@@ -710,7 +723,18 @@ body {
       text-align: center;
 
       span {
-        text-transform: none;
+        &.call-to-action-hyphen {
+          display: inline-block;
+          width: 25px;
+          height: 1px;
+          margin-right: 10px;
+          vertical-align: middle;
+          background: $color-link;
+        }
+
+        &:last-child {
+          text-transform: none;
+        }
       }
     }
   }
@@ -731,15 +755,9 @@ body {
     height: 752px;;
   }
 
-  button:hover {
-    background: black;
-    color: white;
-  }
-
   h2 {
     font-size: 3.2em;
     text-align: center;
-    color: $eastsideco-red;
 
     @media only screen and (min-width: 800px) {
       transform: rotate(-180deg);
@@ -830,6 +848,10 @@ body {
           color: black;
           cursor: default;
           opacity: 0.5;
+
+          &:hover {
+            background: none;
+          }
         }
       }
     }
@@ -845,7 +867,6 @@ body {
   display: flex;
 
   > div {
-    vertical-align: top;
     margin: 40px;
   
     a {
@@ -870,6 +891,16 @@ body {
           width: 300px;
         }
       }
+
+      svg {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        background: black;
+        fill: white;
+      }
     }
   
     h3 {
@@ -883,7 +914,10 @@ body {
       @media only screen and (min-width: 1470px) {
         max-width: initial;
       }
-  
+    }
+
+    p {
+      font-weight: 100;
     }
   
     button {
@@ -896,8 +930,6 @@ body {
   
       &:hover {
         justify-content: center;
-        background: black;
-        color: white;
   
         span:nth-child(2) {
           width: 30px;
@@ -932,7 +964,6 @@ body {
     font-size: 5em;
     line-height: 70px;
     text-transform: uppercase;
-    color: black;
 
     @media only screen and (min-width: 800px) {
       width: 370px;
@@ -951,69 +982,52 @@ body {
       width: 50%;
     }
 
-    // > div {
-      > div {
-        width: 100%;
-        max-width: 500px;
-        margin-bottom: 20px;
-        font-weight: 100;
+    > div {
+      width: 100%;
+      max-width: 500px;
+      margin-bottom: 20px;
+      font-weight: 100;
 
-        p {
-          @media only screen and (min-width: 800px) {
-            max-width: 350px;
-          }
+      p {
+        @media only screen and (min-width: 800px) {
+          max-width: 350px;
         }
       }
-    
-      form {
-        width: 100%;
-        max-width: 500px;
+    }
   
-        p {
-          text-align: center;
-          text-transform: uppercase;
-          background: green;
-          color: white;
-    
-          &.successful {
-            background: green;
-            margin-bottom: 20px;
-          }
-    
-          &.error {
-            background: $eastsideco-red;
-          }
-        }
-    
-        > div {
-          position: relative;
-          width: 91%;
+    form {
+      width: 100%;
+      max-width: 500px;
+
+      p {
+        text-align: center;
+        text-transform: uppercase;
+        background: green;
+        color: white;
+  
+        &.successful {
           margin-bottom: 20px;
-    
-          input {
-            width: 100%;
-            padding: 20px;
-            border: 1px solid #CBCBCB;
-    
-            &.error {
-              border: 1px solid $eastsideco-red;
-            }
-          }
-    
-          button {
-            position: absolute;
-            top: 10%;
-            right: -10%;
-            padding: 20px;
-            background: $eastsideco-red;
-            color: white;
-    
-            &:hover {
-              background: black;
-            }
-          }
         }
       }
-    // }
+  
+      > div {
+        position: relative;
+        width: 91%;
+        margin-bottom: 20px;
+  
+        input {
+          width: 100%;
+          padding: 20px;
+          border: 1px solid #CBCBCB;
+        }
+  
+        button {
+          position: absolute;
+          top: 10%;
+          right: -10%;
+          padding: 20px;
+        }
+      }
+    }
   }
 }
