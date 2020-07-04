@@ -3,15 +3,8 @@ const HEADER = document.getElementById("main-header");
 let previousPageYOffset = window.pageYOffset;
 let sideMenuActive = false;
 
-// featured-products-slider variables
-let previousProductIteration = 1;
-let previousProductSlidingContainerTranslate = 0;
-let containerWidthInterval = 0;
-let previousWindowWidth = 0;
-
-// testimonials-slider variables
-let previousTestimonialIteration = 1;
-let previousTestimonalSlidingContainerTranslate = 0;
+// Slider variables
+const SLIDER_DICTIONARY = [];
 
 // Navigation functions
 function toggleFixedHeader() {
@@ -55,96 +48,45 @@ function toggleSideMenu() {
   }
 }
 
-// featured-products-slider function
-function showPrevNextProduct(event, totalProducts, slideDirection) {
-  const CURRENT_BUTTON = event.target;
-  const SIBLING_BUTTON = CURRENT_BUTTON.previousElementSibling || CURRENT_BUTTON.nextElementSibling;
-  const SLIDING_CONTAINER = CURRENT_BUTTON.parentElement.nextElementSibling.children[0];
-  const PRODUCT_CONTAINER = SLIDING_CONTAINER.firstElementChild;
+// Slider function
+function showPrevNextSlide(currentButton, totalSlideItems, slideDirection) {
+  const SIBLING_BUTTON = currentButton.previousElementSibling || currentButton.nextElementSibling;
+  const SLIDING_CONTAINER = currentButton.parentElement.parentElement.getElementsByClassName('slider')[0];
+  let currentSliderInfo = SLIDER_DICTIONARY.find(slider => slider.sliderContainer === SLIDING_CONTAINER);
 
-  const TRANSLATE_DISTANCE = PRODUCT_CONTAINER.offsetWidth + parseInt(getComputedStyle(PRODUCT_CONTAINER).marginRight);
+  if (!currentSliderInfo) {
+    currentSliderInfo = {
+      sliderContainer: SLIDING_CONTAINER,
+      previousTranslateDistance: 0,
+      previousSlideItemIteration: 1
+    };
+  }
 
   switch (slideDirection) {
     case 'prev':
-      if (previousProductIteration > 1) {
-        if (previousProductIteration === totalProducts) SIBLING_BUTTON.removeAttribute('disabled', '');
+      if (currentSliderInfo.previousSlideItemIteration > 1) {
+        if (currentSliderInfo.previousSlideItemIteration === totalSlideItems) SIBLING_BUTTON.removeAttribute('disabled', '');
 
-        previousProductIteration--;
+        currentSliderInfo.previousSlideItemIteration--;
+        currentSliderInfo.previousTranslateDistance += 100;
 
-        // + translate
-        previousProductSlidingContainerTranslate += TRANSLATE_DISTANCE;
-
-        SLIDING_CONTAINER.style.transform = `translateX(${previousProductSlidingContainerTranslate}px)`;
-
-        if (previousProductIteration === 1) CURRENT_BUTTON.setAttribute('disabled', '');
+        if (currentSliderInfo.previousSlideItemIteration === 1) currentButton.setAttribute('disabled', '');
       }
 
       break;
     case 'next':
-      if (previousProductIteration < totalProducts) {
-        if (previousProductIteration === 1) SIBLING_BUTTON.removeAttribute('disabled', '');
+      if (currentSliderInfo.previousSlideItemIteration < totalSlideItems) {
+        if (currentSliderInfo.previousSlideItemIteration === 1) SIBLING_BUTTON.removeAttribute('disabled', '');
 
-        previousProductIteration++;
+        currentSliderInfo.previousSlideItemIteration++;
+        currentSliderInfo.previousTranslateDistance -= 100;
 
-        // - translate
-        previousProductSlidingContainerTranslate -= TRANSLATE_DISTANCE;
-
-        SLIDING_CONTAINER.style.transform = `translateX(${previousProductSlidingContainerTranslate}px)`;
-
-        if (previousProductIteration === totalProducts) CURRENT_BUTTON.setAttribute('disabled', '');
+        if (currentSliderInfo.previousSlideItemIteration === totalSlideItems) currentButton.setAttribute('disabled', '');
       }
 
       break;
   }
 
-  // if the window size changes then reset the slider
-  if (!containerWidthInterval) {
-    previousWindowWidth = window.innerWidth;
-
-    containerWidthInterval = setInterval(() => {
-      if (previousWindowWidth !== window.innerWidth) {
-        SLIDING_CONTAINER.style.transform = 'translateX(0px)';
-        SLIDING_CONTAINER.parentElement.parentElement.children[1].children[0].setAttribute('disabled', '');
-        SLIDING_CONTAINER.parentElement.parentElement.children[1].children[1].removeAttribute('disabled', '');
-
-        previousProductIteration = 1;
-        previousProductSlidingContainerTranslate = 0;
-
-        clearInterval(containerWidthInterval);
-        containerWidthInterval = 0;
-      }
-    });
-  }
-}
-
-function showPrevNextTestimonial(event, totalTestimonials, direction) {
-  const CURRENT_BUTTON = event.target;
-  const SIBLING_BUTTON = CURRENT_BUTTON.previousElementSibling || CURRENT_BUTTON.nextElementSibling;
-
-  switch (direction) {
-    case 'prev':
-        if (previousTestimonialIteration === totalTestimonials) SIBLING_BUTTON.removeAttribute('disabled', '');
-
-        previousTestimonialIteration--;
-
-        // + translate
-        previousTestimonalSlidingContainerTranslate += 100;
-
-        if (previousTestimonialIteration === 1) CURRENT_BUTTON.setAttribute('disabled', '');
-
-      break;
-    case 'next':
-        if (previousTestimonialIteration === 1) SIBLING_BUTTON.removeAttribute('disabled', '');
-
-        previousTestimonialIteration++;
-
-        // - translate
-        previousTestimonalSlidingContainerTranslate -= 100;
-
-        if (previousTestimonialIteration === totalTestimonials) CURRENT_BUTTON.setAttribute('disabled', '');
-
-      break;
-  }
-
-  CURRENT_BUTTON.parentElement.previousElementSibling.firstElementChild.children[1].style.transform = `translateX(${previousTestimonalSlidingContainerTranslate}%)`;
+  currentButton.parentElement.parentElement.getElementsByClassName('slider')[0].style.transform = `translateX(${currentSliderInfo.previousTranslateDistance}%)`;
+  SLIDER_DICTIONARY.push(currentSliderInfo);
 }

@@ -16,35 +16,40 @@
 
     <div>
       <button type="button" 
-        onclick="showPrevNextProduct(event, {{ collection.products_count }}, 'prev')" 
+        onclick="showPrevNextSlide(event.target, {{ collection.products_count }}, 'prev')" 
         disabled>
 
         Prev
       </button>
       <button type="button" 
-        onclick="showPrevNextProduct(event, {{ collection.products_count }}, 'next')">
+        onclick="showPrevNextSlide(event.target, {{ collection.products_count }}, 'next')">
 
         Next
       </button>
     </div>
 
+    <!-- track -->
     <div>
+      <!-- second margin track -->
       <div>
-        {%- for product in collection.products -%}
-          <div>
-            <a href="{{ product.url }}">
-              <!-- <div style="background-image: url('{{ product.featured_image | img_url: '300x' }}');"></div> -->
-              <img src="{{ product.featured_image | img_url: '258x' }}" alt="{{ product.title | downcase}}">
-            </a>
-            <h3>{{ product.title }}</h3>
-            <p>{{ product.description }}</p>
-            <button type="button">
-              <span>Add to bag</span>
-              <span></span>
-              <span>{{ product.price | money_without_trailing_zeros }}</span>
-            </button>
-          </div>
-        {%- endfor -%}
+        <!-- slider -->
+        <div class="slider">
+          {%- for product in collection.products -%}
+            <div>
+              <a href="{{ product.url }}">
+                <!-- <div style="background-image: url('{{ product.featured_image | img_url: '300x' }}');"></div> -->
+                <img src="{{ product.featured_image | img_url: '258x' }}" alt="{{ product.title | downcase}}">
+              </a>
+              <h3>{{ product.title }}</h3>
+              <p>{{ product.description }}</p>
+              <button type="button">
+                <span>Add to bag</span>
+                <span></span>
+                <span>{{ product.price | money_without_trailing_zeros }}</span>
+              </button>
+            </div>
+          {%- endfor -%}
+        </div>
       </div>
     </div>
   </div>

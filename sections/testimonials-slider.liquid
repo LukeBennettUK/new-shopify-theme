@@ -5,7 +5,7 @@
     <div>
       {% render 'icon-double-quotation' %}
 
-      <div>
+      <div class="slider">
         {% for block in section.blocks %}
           <div>
             <p>{{ block.settings.testimonial }}</p>
@@ -18,13 +18,13 @@
 
   <div>
     <button type="button" 
-      onclick="showPrevNextTestimonial(event, {{ section.blocks.size }}, 'prev')" 
+      onclick="showPrevNextSlide(event.target, {{ section.blocks.size }}, 'prev')" 
       disabled>
 
       Prev
     </button>
     <button type="button" 
-  onclick="showPrevNextTestimonial(event, {{ section.blocks.size }}, 'next')">
+  onclick="showPrevNextSlide(event.target, {{ section.blocks.size }}, 'next')">
 
       Next
     </button>

@@ -512,6 +512,7 @@ body {
   }
 
   > div {
+    // main
     &:nth-child(2) {
       position: relative;
       align-items: center;
@@ -545,6 +546,7 @@ body {
         }
       }
 
+      // buttons
       > div:nth-child(2) {
         justify-content: center;
         display: flex;
@@ -566,73 +568,76 @@ body {
         }
       }
 
+      // track
       > div:last-child {
-        display: flex;
-        overflow: hidden;
-        width: 298px;
-        max-width: 380px;
-        padding: 20px;
+        max-width: 298px;
         background: white;
 
         @media only screen and (min-width: 1470px) {
-          width: 100%;
-          padding: 40px;
+          max-width: 370px;
         }
     
+        // second track
         > div {
-          display: flex;
-          transition: transform 0.3s ease-out 0s;
-    
-          div {
-            margin-right: 20px;
+          margin: 20px;
+          overflow: hidden;
 
-            @media only screen and (min-width: 1470px) {
-              margin-right: 40px;
-            }
+          @media only screen and (min-width: 1470px) {
+            margin: 35px;
+          }
 
-            img {
-              @media only screen and (min-width: 1470px) {
-                width: 300px;
-              }
-            }
-
-            h3 {
-              margin-top: 20px;
-              color: black;
-              white-space: nowrap;
-              overflow: hidden;
-              max-width: 250px;
-              text-overflow: ellipsis;
-
-              @media only screen and (min-width: 1470px) {
-                max-width: initial;
-              }
-  
-            }
-
-            button {
-              align-items: center;
-              justify-content: space-between;
-              display: flex;
-              transition: background .1s ease-out;
-              width: 100%;
-              padding: 20px 0;
+          // slider
+          > div {
+            grid-template-columns: repeat(100, 100%);
+            display: grid;
+            transition: transform 0.3s ease-out 0s;
       
-              &:hover {
-                justify-content: center;
-      
-                span:nth-child(2) {
-                  width: 30px;
-                  margin-left: 10px;
-                  margin-right: 10px;
-                  background: white;
+            // product container
+            div {
+              img {
+                @media only screen and (min-width: 1470px) {
+                  width: 300px;
                 }
               }
-      
-              span:nth-child(2) {
-                width: 140px;
-                height: 1px;
-                background: $color-body;
+  
+              h3 {
+                margin-top: 20px;
+                color: black;
+                white-space: nowrap;
+                overflow: hidden;
+                max-width: 250px;
+                text-overflow: ellipsis;
+  
+                @media only screen and (min-width: 1470px) {
+                  max-width: initial;
+                }
+    
+              }
+  
+              button {
+                align-items: center;
+                justify-content: space-between;
+                display: flex;
+                transition: background .1s ease-out;
+                width: 100%;
+                padding: 20px 0;
+        
+                &:hover {
+                  justify-content: center;
+        
+                  span:nth-child(2) {
+                    width: 30px;
+                    margin-left: 10px;
+                    margin-right: 10px;
+                    background: white;
+                  }
+                }
+        
+                span:nth-child(2) {
+                  width: 140px;
+                  height: 1px;
+                  background: $color-body;
+                }
               }
             }
           }
