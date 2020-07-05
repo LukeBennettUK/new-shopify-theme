@@ -100,10 +100,17 @@ body {
   }
 }
 
-.margin-bottom {
-  margin-bottom: 20px;
-}
+/*================ Media Query Mixin ================*/
 
+@mixin media-query($size) {
+  @if $size == medium-up {
+    @media only screen and (min-width: 800px) { @content; }
+  } @else if $size == large-up {
+    @media only screen and (min-width: 1050px) { @content; }
+  } @else if $size == widescreen-up {
+    @media only screen and (min-width: 1470px) { @content; }
+  }
+}
 
 /*================ HEADER ================*/
 
@@ -113,7 +120,7 @@ body {
   overflow: hidden;
   width: 100%;
 
-  @media only screen and (min-width: 800px) {
+  @include media-query(medium-up) {
     height: 100vh;
   }
 
@@ -123,7 +130,7 @@ body {
     width: 100%;
     height: 80px;
 
-    @media only screen and (min-width: 800px) {
+    @include media-query(medium-up) {
       padding: 50px;
     }
 
@@ -132,7 +139,7 @@ body {
       display: none;
       transform: translateY(-100%);
 
-      @media only screen and (min-width: 800px) {
+      @include media-query(medium-up) {
         padding: 0;
 
         nav {
@@ -185,7 +192,7 @@ body {
         }
 
         .primary-navigation-link {
-          @media only screen and (min-width: 800px) {
+          @include media-query(medium-up) {
             display: none; 
           }
         }
@@ -211,7 +218,7 @@ body {
         width: 50%;
         padding: 20px;
 
-        @media only screen and (min-width: 800px) {
+        @include media-query(medium-up) {
           position: absolute;
           left: 70px;
           top: 70px;
@@ -221,7 +228,7 @@ body {
         #shop-logo {
           width: 50%;
   
-          @media only screen and (min-width: 800px) {
+          @include media-query(medium-up) {
             flex: 1;
             width: auto;
             padding: 0;
@@ -239,7 +246,7 @@ body {
         #shop-name {
           overflow: hidden;
   
-          @media only screen and (min-width: 800px) {
+          @include media-query(medium-up) {
             writing-mode: vertical-rl;
             width: auto;
             height: 400px;
@@ -266,7 +273,7 @@ body {
           padding: 0;
           list-style-type: none;
 
-          @media only screen and (min-width: 800px) {
+          @include media-query(medium-up) {
             display: block;  
           }
 
@@ -292,7 +299,7 @@ body {
       .primary-navigation-link {
         order: 2;
 
-        @media only screen and (min-width: 800px) {
+        @include media-query(medium-up) {
           order: 1;
           display: block;
           width: auto;
@@ -310,13 +317,13 @@ body {
         width: 50%;
         padding: 20px;
 
-        @media only screen and (min-width: 800px) {
+        @include media-query(medium-up) {
           width: auto;
           padding: 0;
         }
 
         > * {
-          @media only screen and (min-width: 800px) {
+          @include media-query(medium-up) {
             margin: 20px;
           }
         }
@@ -395,7 +402,7 @@ body {
   flex-direction: column;
   display: flex;
 
-  @media only screen and (min-width: 800px) {
+  @include media-query(medium-up) {
     flex-direction: row;
     flex-wrap: wrap;
   }
@@ -410,7 +417,7 @@ body {
       width: 100%;
       height: 100vh;
 
-      @media only screen and (min-width: 800px) {
+      @include media-query(medium-up) {
         align-items: flex-end;
         justify-content: flex-start;
         flex-direction: row;
@@ -427,13 +434,21 @@ body {
         object-fit: cover;
       }
 
+      svg {
+        position: absolute;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        background: lightgrey;
+      }
+
       h2 {
         position: relative;
         z-index: 1;
         text-transform: uppercase;
         margin-bottom: 20px;
 
-        @media only screen and (min-width: 800px) {
+        @include media-query(medium-up) {
           font-size: 6.3em;
           line-height: 1;
           width: 560px;
@@ -452,7 +467,7 @@ body {
           background: initial;
         }
 
-        @media only screen and (min-width: 800px) { 
+        @include media-query(medium-up) { 
           position: absolute;
           z-index: 2;
           padding: 30px;
@@ -469,7 +484,7 @@ body {
       display: none;
       background: rgb(255, 0, 81);
 
-      @media only screen and (min-width: 800px) {
+      @include media-query(medium-up) {
         justify-content: center;
         display: flex;
         width: 30%;
@@ -488,6 +503,11 @@ body {
             position: relative;
             z-index: -1;
           }
+
+          svg {
+            background: black;
+            fill: white;
+          }
         }
       }
       
@@ -498,7 +518,7 @@ body {
       margin-left: 20px;
       margin-top: -40px;
 
-      @media only screen and (min-width: 800px) {
+      @include media-query(medium-up) {
         width: 20%;
         margin-top: -90px;
         margin-left: 260px;
@@ -509,11 +529,16 @@ body {
         height: 100%;
         object-fit: cover;
       }
+
+      svg {
+        background: black;
+        fill: white;
+      }
     }
   }
 
   .paragraph {
-    @media only screen and (min-width: 800px) {
+    @include media-query(medium-up) {
       align-items: center;
       justify-content: center;
       display: flex;
@@ -523,7 +548,7 @@ body {
     p {
       margin: 20px;
 
-      @media only screen and (min-width: 800px) {
+      @include media-query(medium-up) {
         width: 400px;
       }
     }
@@ -533,160 +558,179 @@ body {
 /*================ FEATURED-PRODUCTS-SLIDER ================*/
 
 .featured-products-slider {
-  @media only screen and (min-width: 800px) {
+  height: 800px;
+
+  @include media-query(medium-up) {
     display: flex;
   }
 
-  > div {
-    // main
-    &:nth-child(2) {
-      position: relative;
-      align-items: center;
-      flex-direction: column;
+  // main
+  > div:nth-child(2) {
+    position: relative;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+    padding: 30px;
+
+    @include media-query(medium-up) {
+      justify-content: center;
+      width: 45%;
+      padding: 60px;
+    }
+
+    @include media-query(widescreen-up) {
+      width: 35%;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 3em;
+      text-align: center;
+      text-transform: uppercase;
+
+      @include media-query(medium-up) {
+        position: absolute;
+        right: 0;
+        transform: rotate(-90deg);
+        margin-top: 20px;
+        margin-right: -300px;
+        font-size: 7em;
+      }
+    }
+
+    // buttons
+    > div:nth-child(2) {
+      justify-content: center;
       display: flex;
-      padding: 30px;
 
-      @media only screen and (min-width: 800px) {
-        justify-content: center;
-        width: 45%;
-        padding: 60px;
-      }
+      button {
+        padding: 20px 40px;
+        color: white;
+        font-size: 1em;
 
-      @media only screen and (min-width: 1470px) {
-        width: 35%;
-      }
-
-      h2 {
-        margin-bottom: 20px;
-        font-size: 3em;
-        text-align: center;
-        text-transform: uppercase;
-
-        @media only screen and (min-width: 800px) {
-          position: absolute;
-          right: 0;
-          transform: rotate(-90deg);
-          margin-top: 20px;
-          margin-right: -300px;
-          font-size: 7em;
+        &:first-child {
+          border-right: 1px solid white;
         }
-      }
 
-      // buttons
-      > div:nth-child(2) {
-        justify-content: center;
-        display: flex;
+        &[disabled] {
+          background: none;
+          cursor: default;
+          opacity: 0.8;
 
-        button {
-          padding: 20px 40px;
-          color: white;
-          font-size: 1em;
-
-          &:first-child {
-            border-right: 1px solid white;
-          }
-
-          &[disabled] {
+          &:hover {
             background: none;
-            cursor: default;
-            opacity: 0.8;
-
-            &:hover {
-              background: none;
-            }
           }
         }
       }
+    }
 
-      // track
-      > div:last-child {
-        max-width: 298px;
-        background: white;
+    // track
+    > div:last-child {
+      max-width: 298px;
+      background: white;
 
-        @media only screen and (min-width: 1470px) {
-          max-width: 370px;
+      @include media-query(widescreen-up) {
+        max-width: 370px;
+      }
+  
+      // second track
+      > div {
+        margin: 20px;
+        overflow: hidden;
+
+        @include media-query(widescreen-up) {
+          margin: 35px;
         }
-    
-        // second track
+
+        // slider
         > div {
-          margin: 20px;
-          overflow: hidden;
+          grid-template-columns: repeat(100, 100%);
+          display: grid;
+          transition: transform 0.3s ease-out 0s;
+    
+          // product container
+          div {
+            img {
+              @include media-query(widescreen-up) {
+                width: 300px;
+              }
+            }
 
-          @media only screen and (min-width: 1470px) {
-            margin: 35px;
-          }
+            svg {
+              width: 100%;
+              height: 340px;
+              background: lightgrey;
 
-          // slider
-          > div {
-            grid-template-columns: repeat(100, 100%);
-            display: grid;
-            transition: transform 0.3s ease-out 0s;
+              @include media-query(widescreen-up) {
+                height: 400px;
+              }
+            }
+
+            h3 {
+              margin-top: 20px;
+              color: black;
+              white-space: nowrap;
+              overflow: hidden;
+              max-width: 250px;
+              text-overflow: ellipsis;
+
+              @include media-query(widescreen-up) {
+                max-width: initial;
+              }
+            }
+
+            p {
+              font-weight: 100;
+            }
+
+            button {
+              align-items: center;
+              justify-content: space-between;
+              display: flex;
+              transition: background .1s ease-out;
+              width: 100%;
+              padding: 20px 0;
       
-            // product container
-            div {
-              img {
-                @media only screen and (min-width: 1470px) {
-                  width: 300px;
-                }
-              }
-  
-              h3 {
-                margin-top: 20px;
-                color: black;
-                white-space: nowrap;
-                overflow: hidden;
-                max-width: 250px;
-                text-overflow: ellipsis;
-  
-                @media only screen and (min-width: 1470px) {
-                  max-width: initial;
-                }
-              }
-
-              p {
-                font-weight: 100;
-              }
-  
-              button {
-                align-items: center;
-                justify-content: space-between;
-                display: flex;
-                transition: background .1s ease-out;
-                width: 100%;
-                padding: 20px 0;
-        
-                &:hover {
-                  justify-content: center;
-        
-                  span:nth-child(2) {
-                    width: 30px;
-                    margin-left: 10px;
-                    margin-right: 10px;
-                    background: white;
-                  }
-                }
-        
+              &:hover {
+                justify-content: center;
+      
                 span:nth-child(2) {
-                  width: 140px;
-                  height: 1px;
-                  background: $color-body;
+                  width: 30px;
+                  margin-left: 10px;
+                  margin-right: 10px;
+                  background: white;
                 }
+              }
+      
+              span:nth-child(2) {
+                width: 140px;
+                height: 1px;
+                background: $color-body;
               }
             }
           }
         }
       }
     }
+  }
 
-    &:last-child {
-      display: none;
-      width: 65%;
-      background-position: center;
-      background-size: cover;
-  
-      @media only screen and (min-width: 800px) {
-        display: block;
-      }
+  > img {
+    display: none;
+    width: 65%;
+    object-fit: cover;
+
+    @include media-query(medium-up) {
+      display: block;
+    }
+  }
+
+  > svg {
+    display: none;
+    width: 65%;
+    background: lightgrey;
+
+    @include media-query(medium-up) {
+      display: block;
     }
   }
 }
@@ -696,7 +740,7 @@ body {
 .featured-collections {
   padding: 20px;
 
-  @media only screen and (min-width: 800px) {
+  @include media-query(medium-up) {
     flex-wrap: wrap;
     justify-content: space-around;
     display: flex;
@@ -711,7 +755,7 @@ body {
   a {
     position: relative;
     
-    @media only screen and (min-width: 800px) {
+    @include media-query(medium-up) {
       width: 45%;
       max-width: 604px;
       margin-bottom: 50px;
@@ -720,7 +764,7 @@ body {
     &:not(:last-child) {
       margin-bottom: 20px;
 
-      @media only screen and (min-width: 800px) {
+      @include media-query(medium-up) {
         margin-bottom: 50px;
       }
     }
@@ -733,6 +777,13 @@ body {
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+      background: #ffb3be;
+      fill: grey;
     }
 
     div {
@@ -765,12 +816,12 @@ body {
 .testimonials-slider {
   padding: 20px;
 
-  @media only screen and (min-width: 800px) {
+  @include media-query(medium-up) {
     display: flex;
     height: 615px;;
   }
 
-  @media only screen and (min-width: 1050px) {
+  @include media-query(large-up) {
     display: flex;
     height: 752px;;
   }
@@ -779,7 +830,7 @@ body {
     font-size: 3.2em;
     text-align: center;
 
-    @media only screen and (min-width: 800px) {
+    @include media-query(medium-up) {
       transform: rotate(-180deg);
       width: 30%;
       writing-mode: vertical-rl;
@@ -790,14 +841,14 @@ body {
       text-transform: uppercase;
     }
 
-    @media only screen and (min-width: 1050px) {
+    @include media-query(large-up) {
       margin: 20px 70px;
       font-size: 11em;
     }
   }
 
   > div:last-child {
-    @media only screen and (min-width: 800px) {
+    @include media-query(medium-up) {
       width: 70%;
     }
 
@@ -814,7 +865,7 @@ body {
         svg {
           width: 50px;
 
-          @media only screen and (min-width: 1050px) {
+          @include media-query(large-up) {
             width: 80px;
             margin-bottom: 20px;
           }
@@ -830,7 +881,7 @@ body {
               &:first-child {
                 margin-bottom: 20px;
 
-                @media only screen and (min-width: 1050px) {
+                @include media-query(large-up) {
                   margin-bottom: 50px;
                   font-size: 1.1em;
                 }
@@ -851,7 +902,7 @@ body {
       display: flex;
       height: 10%;
   
-      @media only screen and (min-width: 800px) {
+      @include media-query(medium-up) {
         justify-content: flex-end;
       }
 
@@ -896,7 +947,7 @@ body {
       height: 348px;
       border: 2px solid $eastsideco-red;
 
-      @media only screen and (min-width: 1470px) {
+      @include media-query(widescreen-up) {
         width: 304px;
         height: 404px;
       }
@@ -907,7 +958,7 @@ body {
         left: 8px;
         display: block;
 
-        @media only screen and (min-width: 1470px) {
+        @include media-query(widescreen-up) {
           width: 300px;
         }
       }
@@ -931,7 +982,7 @@ body {
       max-width: 250px;
       text-overflow: ellipsis;
   
-      @media only screen and (min-width: 1470px) {
+      @include media-query(widescreen-up) {
         max-width: initial;
       }
     }
@@ -973,7 +1024,7 @@ body {
 .stay-in-touch {
   padding: 20px;
 
-  @media only screen and (min-width: 800px) {
+  @include media-query(medium-up) {
     display: flex;
     padding: 70px 20px;
   }
@@ -985,7 +1036,7 @@ body {
     line-height: 70px;
     text-transform: uppercase;
 
-    @media only screen and (min-width: 800px) {
+    @include media-query(medium-up) {
       width: 370px;
       font-size: 6em;
       line-height: 90px;
@@ -998,7 +1049,7 @@ body {
     justify-content: center;
     display: flex;
 
-    @media only screen and (min-width: 800px) {
+    @include media-query(medium-up) {
       width: 50%;
     }
 
@@ -1009,7 +1060,7 @@ body {
       font-weight: 100;
 
       p {
-        @media only screen and (min-width: 800px) {
+        @include media-query(medium-up) {
           max-width: 350px;
         }
       }

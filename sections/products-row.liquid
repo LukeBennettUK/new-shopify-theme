@@ -3,7 +3,7 @@
 {%- for block in section.blocks -%}
   {%- assign product = all_products[block.settings.product] -%}
   
-  {%- unless all_products[block.settings.product] == empty -%}
+  {%- unless product == empty -%}
     <div>
       <a href="{{ product.url }}">
         <img src="{{ product.featured_image | img_url: '258x' }}" alt="{{ product.title | downcase}}">
@@ -17,13 +17,13 @@
       </button>
     </div>
   {%- else -%}
-    {%- render 'product-row-placeholder' -%}
+    {%- render 'product-row-placeholder', product_number: 1 -%}
   {%- endunless -%}
 {%- endfor -%}
 
 {%- if section.blocks.size == 0 -%}
-  {%- for product in (1..4) -%}
-    {%- render 'product-row-placeholder' -%}
+  {%- for index in (1..4) -%}
+    {%- render 'product-row-placeholder', product_number: index -%}
   {%- endfor -%}
 {%- endif -%}
 

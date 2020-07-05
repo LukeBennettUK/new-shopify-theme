@@ -1,19 +1,29 @@
 {% for block in section.blocks %}
   {%- assign collection = collections[block.settings.featured_collection] -%}
 
-  <a href="{{ collection.url }}">
-    <img src="{{ collection.image | img_url: '500x' }}" alt="{{ collection.title | downcase }}">
-    <div>
-      <h2>{{ collection.title }}</h2>
+  {%- unless collection == empty -%}
+    <a href="{{ collection.url }}">
+      <img src="{{ collection.image | img_url: '500x' }}" alt="{{ collection.title | downcase }}">
+      <div>
+        <h2>{{ collection.title }}</h2>
 
-      {%- unless block.settings.call_to_action_text == '' -%}
-        <span class="call-to-action-hyphen"></span>
-      {%- endunless -%}
+        {%- unless block.settings.call_to_action_text == '' -%}
+          <span class="call-to-action-hyphen"></span>
+        {%- endunless -%}
 
-      <span>{{ block.settings.call_to_action_text }}</span>
-    </div>
-  </a>
+        <span>{{ block.settings.call_to_action_text }}</span>
+      </div>
+    </a>
+  {%- else -%}
+    {% render 'featured-collection-placeholder', collection_number: 1 %}
+  {%- endunless -%}
 {% endfor %}
+
+{%- if section.blocks.size == 0 -%}
+  {%- for index in (1..2) -%}
+    {% render 'featured-collection-placeholder', collection_number: index %}
+  {%- endfor -%}
+{%- endif -%}
 
 {% schema %}
   {

@@ -8,10 +8,16 @@
       <div class="slider">
         {% for block in section.blocks %}
           <div>
-            <!-- <p>{{ block.settings.testimonial }}</p> -->
             {{ block.settings.testimonial }}
             <p>{{ block.settings.testimonial_author }}</p>
           </div>
+        {%- else -%}
+          {%- for index in (1..4) -%}
+            <div>
+              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Et at illum, a perspiciatis ex fugit cumque soluta, cupiditate id nostrum neque fugiat iure quod.</p>
+              <p>Jane Doe</p>
+            </div>
+          {%- endfor -%}
         {% endfor %}
       </div>
     </div>
@@ -19,13 +25,13 @@
 
   <div>
     <button type="button" 
-      onclick="showPrevNextSlide(event.target, {{ section.blocks.size }}, 'prev')" 
+      onclick="showPrevNextSlide(event.target, {%- if section.blocks.size > 0 -%}{{ section.blocks.size }}{%- else -%}4{%- endif -%}, 'prev')" 
       disabled>
 
       Prev
     </button>
     <button type="button" 
-  onclick="showPrevNextSlide(event.target, {{ section.blocks.size }}, 'next')">
+  onclick="showPrevNextSlide(event.target, {%- if section.blocks.size > 0 -%}{{ section.blocks.size }}{%- else -%}4{%- endif -%}, 'next')">
 
       Next
     </button>
