@@ -401,10 +401,7 @@ body {
   }
 
   div {
-    background-size: cover;
-    background-position: center;
-
-    &.first-image {
+    &.first-image-container {
       position: relative;
       align-items: center;
       flex-direction: column;
@@ -419,7 +416,15 @@ body {
         flex-direction: row;
         width: 70%;
         height: 130vh;
-        padding: 50px;
+      }
+
+      img {
+        position: absolute;
+        z-index: -1;
+        display: block;
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
       }
 
       h2 {
@@ -432,8 +437,8 @@ body {
           font-size: 6.3em;
           line-height: 1;
           width: 560px;
-          margin-bottom: 0;
-          margin-left: 50px;
+          margin-bottom: 50px;
+          margin-left: 70px;
         }
       }
 
@@ -449,6 +454,7 @@ body {
 
         @media only screen and (min-width: 800px) { 
           position: absolute;
+          z-index: 2;
           padding: 30px;
           font-size: 0.9em;
           bottom: 180px;
@@ -457,7 +463,9 @@ body {
       }
     }
 
-    &.second-image {
+    &.second-image-container {
+      position: relative;
+      z-index: 1;
       display: none;
       background: rgb(255, 0, 81);
 
@@ -465,29 +473,41 @@ body {
         justify-content: center;
         display: flex;
         width: 30%;
-        height: 130vh;
       }
 
-      div {
-        height: 400px;
+      > div {
         width: 80%;
         margin-top: 200px;
-        box-shadow: inset 0 0 0 2000px rgba(255, 0, 150, 0.2);
-        filter: saturate(2.2);
+
+        .overlay {
+          box-shadow: inset 0 0 0 2000px rgba(255, 0, 150, 0.2);
+
+          img {
+            width: 100%;
+            filter: saturate(2.2);
+            position: relative;
+            z-index: -1;
+          }
+        }
       }
+      
     }
 
-    &.third-image {
-      position: relative;
-      height: 50vh;
+    &.third-image-container {
       width: 80%;
       margin-left: 20px;
       margin-top: -40px;
 
-      @media only screen and (min-width: 800px) { 
+      @media only screen and (min-width: 800px) {
         width: 20%;
         margin-top: -90px;
         margin-left: 260px;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
     }
   }

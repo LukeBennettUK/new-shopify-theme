@@ -17,35 +17,13 @@
       </button>
     </div>
   {%- else -%}
-    <div>
-      <a>
-        {{ 'product-1' | placeholder_svg_tag }}
-      </a>
-      <h3>Lorem</h3>
-      <p>Lorem, ipsum dolor</p>
-      <button type="button">
-        <span>Add to bag</span>
-        <span></span>
-        <span>{{ 1000 | money_without_trailing_zeros }}</span>
-      </button>
-    </div>
+    {%- render 'product-row-placeholder' -%}
   {%- endunless -%}
 {%- endfor -%}
 
 {%- if section.blocks.size == 0 -%}
   {%- for product in (1..4) -%}
-    <div>
-      <a>
-        {{ 'product-1' | placeholder_svg_tag }}
-      </a>
-      <h3>Lorem</h3>
-      <p>Lorem, ipsum dolor</p>
-      <button type="button">
-        <span>Add to bag</span>
-        <span></span>
-        <span>{{ 1000 | money_without_trailing_zeros }}</span>
-      </button>
-    </div>
+    {%- render 'product-row-placeholder' -%}
   {%- endfor -%}
 {%- endif -%}
 
